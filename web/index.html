@@ -12,10 +12,49 @@ and open the template in the editor.
     
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         
-        <style>
+        <style >
             body{
-                background-image: url(/imagens/escola.png);
+                background-image: url(imagens/escola.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
             }
+            .formulario{
+                background: rgba(0,0,255,0.1);
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 30px rgba(0,0,0,0.568);
+            }
+            .entrar{
+                background-color: #32383e;
+                padding: 10px;
+                font-size: 16px;
+                font-weight: 700!important;
+                box-shadow: 0 0 30px rgba(0,0,0,0.568);
+                transition: 0.5s ease-in
+
+            }
+            .form-control{
+                background: rgba(0,0,0,0.3);
+                border-style: none;
+                transition: 0.5s ease-in;
+                outline: none;
+                box-shadow: none;
+                
+                
+            }
+            .form-control::placeholder{
+                color: white;
+            }
+            .form-control:focus{
+                background:none;
+                
+            }
+            .entrar:hover{
+                color: #ffc107;
+                
+            }
+            
         </style>
         
     </head>
@@ -23,7 +62,7 @@ and open the template in the editor.
                
         <div>TODO write content</div>
         
-        <div class="container bg-dark small">
+        <div class="container small">
             <div class="row justify-content-center" >
                 <div class="col-md-4 formulario">
                     <form action="">
@@ -37,7 +76,7 @@ and open the template in the editor.
                             <input type="password" class="form-control" placeholder="Senha">                            
                         </div>
                         <div class="form-group mx-sm-4">
-                            <input type="submit" class="btn btn-block" value="Entrar">
+                            <input type="submit" class="btn btn-block entrar" value="Entrar">
                         </div>
                     </form>
                 </div>
