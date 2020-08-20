@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20/08/2020, 09:58:01
+    Author     : Administrador
+*/
+
+
+body{
+    background-image: url("../imagens/escola.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.formulario{
+    background: rgba(0,0,0,0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.568);
+}
+.entrar{
+    background-color: #32383e;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 700!important;
+    box-shadow: 0 0 30px rgba(0,0,0,0.568);
+    transition: 0.5s ease-in
+}
+.form-control{
+    background: rgba(0,0,0,0.3);
+    border-style: none;
+    transition: 0.5s ease-in;
+    outline: none;
+    box-shadow: none;
+}
+.form-control::placeholder{
+    color: white;
+}
+.form-control:focus{
+    background:none;
+}
+.entrar:hover{
+    color: #ffc107;
+}

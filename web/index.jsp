@@ -1,65 +1,20 @@
+<%-- 
+    Document   : index
+    Created on : 20/08/2020, 14:28:16
+    Author     : Administrador
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Index</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
-        <style >
-            body{
-                background-image: url(imagens/escola.png);
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-attachment: fixed;
-            }
-            .formulario{
-                background: rgba(0,0,255,0.1);
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 0 30px rgba(0,0,0,0.568);
-            }
-            .entrar{
-                background-color: #32383e;
-                padding: 10px;
-                font-size: 16px;
-                font-weight: 700!important;
-                box-shadow: 0 0 30px rgba(0,0,0,0.568);
-                transition: 0.5s ease-in
-            }
-            .form-control{
-                background: rgba(0,0,0,0.3);
-                border-style: none;
-                transition: 0.5s ease-in;
-                outline: none;
-                box-shadow: none;
-            }
-            .form-control::placeholder{
-                color: white;
-            }
-            .form-control:focus{
-                background:none;
-            }
-            .entrar:hover{
-                color: #ffc107;
-            }
-        </style>
-
+        <link href="css/estiloindex.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <script>
-            function logar() {
-                document.getElementById('login').style.display='';
-            }
-            function fechar_logar(){
-                document.getElementById('login').style.display="none";
-            }
-        </script>
 
         <div>TODO write content</div>
 
@@ -88,6 +43,7 @@ and open the template in the editor.
         
         <a href="#" onclick="logar()">Logar</a>
         
+        <script src="js/funcoesindex.js" type="text/javascript"></script>
         <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
