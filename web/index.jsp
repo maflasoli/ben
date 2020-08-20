@@ -4,6 +4,7 @@
     Author     : Administrador
 --%>
 
+<%@ page language="Java" import="BD.conexao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,27 +23,39 @@
         <div class="container small" id="login" style="display:none">
             <div class="row justify-content-center" >
                 <div class="col-md-4 formulario">
-                    <form action="">
+                    <form action="index.jsp">
                         <div class="form-group text-center">
                             <h1 class="text-light">Inicia Sessão de usuário</h1>>                            
                         </div>
                         <div class="form-group mx-sm-4">
-                            <input type="text" class="form-control" placeholder="Usuário">
+                            <input type="text" name="Usuario" class="form-control" placeholder="Usuário">
                         </div>
                         <div class="form-group mx-sm-4">
-                            <input type="password" class="form-control" placeholder="Senha">                            
+                            <input type="password" name="SenhaUsuario" class="form-control" placeholder="Senha">                            
                         </div>
                         <div class="form-group mx-sm-4">
                             <input type="submit" class="btn btn-block entrar" value="Entrar">
                         </div>
                         <a href="#" onclick="fechar_logar()">Fechar Logar</a>
                     </form>
+                    <%
+                        conexao con = new conexao();
+                        String usuario = request.getParameter("Usuario");
+                        String senha = request.getParameter("SenhaUsuario");
+
+                        boolean acesso = con.validaUsuario(usuario, senha);
+
+                        if (acesso && usuario != null && senha != null && !usuario.isEmpty() && !senha.isEmpty()) {
+                            session.setAttribute("usuario", usuario);
+                            response.sendRedirect("ben.jsp");
+                        }
+                    %>
                 </div>
             </div>
         </div>
-        
+
         <a href="#" onclick="logar()">Logar</a>
-        
+
         <script src="js/funcoesindex.js" type="text/javascript"></script>
         <script src="js/jquery-3.5.1.js" type="text/javascript"></script>
         <script src="js/bootstrap.js" type="text/javascript"></script>
