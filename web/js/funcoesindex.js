@@ -9,4 +9,3 @@ function logar() {
 function fechar_logar() {
     document.getElementById('login').style.display = "none";
 }
-

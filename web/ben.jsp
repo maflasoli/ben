@@ -9,9 +9,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><<B.E.N.>></title>
     </head>
     <body>
         <h1>Hello World!</h1>
+        <%
+            String usuario = (String) session.getAttribute("usuario");
+            if(usuario==null){
+                response.sendRedirect("index.jsp");
+            }else{
+                out.print("Bem vindo " + usuario +"<\br>");
+            }
+        %>
+        <h1>PASSOU - 1</h1>
+        <a href="sair.jsp"> Voltar <\a>
     </body>
 </html>
