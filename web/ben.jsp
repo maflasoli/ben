@@ -16,12 +16,12 @@
     <body>
         <h1>Hello World!</h1>
         <%
-            //    String usuario = (String) session.getAttribute("usuario");
-            //  if(usuario==null){
-            //    response.sendRedirect("index.jsp");
-            //}else{
-            //    out.print("Bem vindo " + usuario +"<\br>");
-            // }
+                String usuario = (String) session.getAttribute("usuario");
+                    if (usuario == null) {
+                        response.sendRedirect("index.jsp");
+                    } else {
+                        out.print("Bem vindo " + usuario + "<\br>");
+                    }
         %>
 
         <!------------------MENU SIDE BAR-INICIO-------------------------------------------------------------------------------->
@@ -30,7 +30,7 @@
             <!-- Sidebar  -->
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>Bootstrap Sidebar</h3>
+                    <h3>Menu - Nome escola</h3>
                     <strong>BS</strong>
                 </div>
 
@@ -38,17 +38,17 @@
                     <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fas fa-home"></i>
-                            Home
+                            Aluno
                         </a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a href="#">Home 1</a>
+                                <a href="CadAluno.jsp">Cadastro</a>
                             </li>
                             <li>
-                                <a href="#">Home 2</a>
+                                <a href="#">Matrícula</a>
                             </li>
                             <li>
-                                <a href="#">Home 3</a>
+                                <a href="#">Lista</a>
                             </li>
                         </ul>
                     </li>
