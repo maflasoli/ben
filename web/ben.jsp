@@ -4,7 +4,8 @@
     Author     : Administrador
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" import="java.lang.*" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,7 +31,9 @@
             <!-- Sidebar  -->
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>Menu - Nome escola</h3>
+                    <!-------Usando JSP para pegar o USUÁRIO----------->
+                    <h3>Olá <%=session.getAttribute("usuario")%></h3>
+                    
                     <strong>BS</strong>
                 </div>
 
