@@ -15,11 +15,21 @@
         <style>
             #cadastro{
                 margin: 20px;
+                background-color: gray;
+                border-radius: 20px;
+            }
+            .form-control{
+                margin:20px;
+            }
+            #formulario{
+                margin: 10px;
+                margin: 0 auto;
+                text-align: center;
             }
         </style>
     </head>
     <body>
-        <form>
+        <form id="formulario">
             <div class="container" id="cadastro">
 
                 <div class="row">
