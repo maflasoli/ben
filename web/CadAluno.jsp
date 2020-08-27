@@ -34,11 +34,12 @@
                     </div>
                     <div class="col">
                         <img width="250" height="200" src="imagens/semimagem.png" alt="..." class="img-thumbnail" >
-                        
-                        <div id="fotografia" style="display:none">
+
+                        <div id="fotografia">
                             <div id="my_camera"></div>
                             <!-- First, include the Webcam.js JavaScript Library -->
                             <script type="text/javascript" src="js/webcam.min.js"></script>
+
                             <!-- Configure a few settings and attach camera -->
                             <script language="JavaScript">
                                 Webcam.set({
@@ -80,44 +81,44 @@
         <!--SÓ PARA GUARDAR O VALOR DA FOTO BASE64-->
         <input type="hidden" name="foto" id="foto" value=""/><br><br>
 
-<!--
-        <div id="my_photo_booth">
-                        <div id="my_camera"></div>
-                         First, include the Webcam.js JavaScript Library 
-                        <script type="text/javascript" src="js/webcam.min.js"></script>
-                         Configure a few settings and attach camera 
-                        <script language="JavaScript">
-                            Webcam.set({
-                                // live preview size
-                                width: 320,
-                                height: 240,
-                                // device capture size
-                                dest_width: 640,
-                                dest_height: 480,
-                                // final cropped size
-                                crop_width: 480,
-                                crop_height: 480,
-                                // format and quality
-                                image_format: 'jpeg',
-                                jpeg_quality: 90,
-                                // flip horizontal (mirror mode)
-                                flip_horiz: true
-                            });
-                            Webcam.attach('#my_camera');
-                        </script>
-                         A button for taking snaps 
-            
-                        <div id="pre_take_buttons">
-                             This button is shown before the user takes a snapshot 
-                            <input type=button value="Take Snapshot" onClick="preview_snapshot()">
-                        </div>
-                        <div id="post_take_buttons" style="display:none">
-                             These buttons are shown after a snapshot is taken 
-                            <input type=button value="&lt; Take Another" onClick="cancel_preview()">
-                            <input type=button value="Save Photo &gt;" onClick="save_photo()" style="font-weight:bold;">
-                        </div>
-
-        </div>-->
+        <!--
+                <div id="my_photo_booth">
+                                <div id="my_camera"></div>
+                                 First, include the Webcam.js JavaScript Library 
+                                <script type="text/javascript" src="js/webcam.min.js"></script>
+                                 Configure a few settings and attach camera 
+                                <script language="JavaScript">
+                                    Webcam.set({
+                                        // live preview size
+                                        width: 320,
+                                        height: 240,
+                                        // device capture size
+                                        dest_width: 640,
+                                        dest_height: 480,
+                                        // final cropped size
+                                        crop_width: 480,
+                                        crop_height: 480,
+                                        // format and quality
+                                        image_format: 'jpeg',
+                                        jpeg_quality: 90,
+                                        // flip horizontal (mirror mode)
+                                        flip_horiz: true
+                                    });
+                                    Webcam.attach('#my_camera');
+                                </script>
+                                 A button for taking snaps 
+                    
+                                <div id="pre_take_buttons">
+                                     This button is shown before the user takes a snapshot 
+                                    <input type=button value="Take Snapshot" onClick="preview_snapshot()">
+                                </div>
+                                <div id="post_take_buttons" style="display:none">
+                                     These buttons are shown after a snapshot is taken 
+                                    <input type=button value="&lt; Take Another" onClick="cancel_preview()">
+                                    <input type=button value="Save Photo &gt;" onClick="save_photo()" style="font-weight:bold;">
+                                </div>
+        
+                </div>-->
 
         <div id="results" style="display:none">
             <!-- Your captured image will appear here... -->
@@ -177,5 +178,5 @@
         <input type="submit" value="Cadastrar" name="btnCadAluno" />
 
 
-</body>
+    </body>
 </html>
