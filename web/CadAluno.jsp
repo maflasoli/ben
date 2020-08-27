@@ -31,94 +31,54 @@
                         <input type="text" class="form-control" placeholder="R.M.">
                         <input type="text" class="form-control" placeholder="Nome">
                         <input type="text" class="form-control" placeholder="Endereço">
+                        <!--SÓ PARA GUARDAR O VALOR DA FOTO BASE64-->
+                        <input type="hidden" name="foto" id="foto" value=""/><br><br>
                     </div>
                     <div class="col">
-                        <img width="250" height="200" src="imagens/semimagem.png" alt="..." class="img-thumbnail" >
+                        <img width="250" height="200" id="fotosemimagem" src="imagens/semimagem.png" alt="..." class="img-thumbnail">
 
-                        <div id="fotografia">
-                            <div id="my_camera"></div>
-                            <!-- First, include the Webcam.js JavaScript Library -->
+                        <div id="fotografia" style="display:none">
+                            <div id="minhaCamera"></div>
+                            <!-- INCLUIR A BIBLIOTECA RESPONSÁVEL PELA FOTOGRAFIA -->
                             <script type="text/javascript" src="js/webcam.min.js"></script>
 
-                            <!-- Configure a few settings and attach camera -->
+                            <!-- CONFIGURAR ALGUMAS PROPRIEDADES E ANEXAR A CAMERA -->
                             <script language="JavaScript">
                                 Webcam.set({
-                                    // live preview size
+                                    // TAMANHO VISTO AO VIVO
                                     width: 320,
                                     height: 240,
-                                    // device capture size
+                                    // TAMANHO DO DISPOSITIVO DE CAPTURA
                                     dest_width: 640,
                                     dest_height: 480,
-                                    // final cropped size
+                                    // TAMANHO CORTE FINAL
                                     crop_width: 480,
                                     crop_height: 480,
-                                    // format and quality
+                                    // FORMATO E QUALIDADE DA IMAGEM
                                     image_format: 'jpeg',
                                     jpeg_quality: 90,
-                                    // flip horizontal (mirror mode)
+                                    // GIRAR HORIZONTALMENTE (ESPELHO)
                                     flip_horiz: true
                                 });
-                                Webcam.attach('#my_camera');
+                                Webcam.attach('#minhaCamera');
                             </script>
                             <!-- A button for taking snaps -->
 
-                            <div id="pre_take_buttons">
-                                <!-- This button is shown before the user takes a snapshot -->
-                                <input type=button value="Take Snapshot" onClick="preview_snapshot()">
+                            <div id="botaoPreFoto">
+                                <!-- ESTE BOTÃO É EXIBIDO ANTES DE EFETUAR A FOTO -->
+                                <input type=button value="Take Snapshot" onClick="visualizaFoto()">
                             </div>
-                            <div id="post_take_buttons" style="display:none">
+                            <div id="botaoTiraFoto" style="display:none">
                                 <!-- These buttons are shown after a snapshot is taken -->
-                                <input type=button value="&lt; Take Another" onClick="cancel_preview()">
-                                <input type=button value="Save Photo &gt;" onClick="save_photo()" style="font-weight:bold;">
+                                <input type=button value="&lt; Take Another" onClick="cancelaVisualizar()">
+                                <input type=button value="Save Photo &gt;" onClick="salvaFoto()" style="font-weight:bold;">
                             </div>
                         </div>
+                        <button type="button" class="btn btn-outline-light" onClick="foto()">Tirar foto</button>
                     </div>
                 </div>
             </div>
         </form>
-
-
-        <!--SÓ PARA GUARDAR O VALOR DA FOTO BASE64-->
-        <input type="hidden" name="foto" id="foto" value=""/><br><br>
-
-        <!--
-                <div id="my_photo_booth">
-                                <div id="my_camera"></div>
-                                 First, include the Webcam.js JavaScript Library 
-                                <script type="text/javascript" src="js/webcam.min.js"></script>
-                                 Configure a few settings and attach camera 
-                                <script language="JavaScript">
-                                    Webcam.set({
-                                        // live preview size
-                                        width: 320,
-                                        height: 240,
-                                        // device capture size
-                                        dest_width: 640,
-                                        dest_height: 480,
-                                        // final cropped size
-                                        crop_width: 480,
-                                        crop_height: 480,
-                                        // format and quality
-                                        image_format: 'jpeg',
-                                        jpeg_quality: 90,
-                                        // flip horizontal (mirror mode)
-                                        flip_horiz: true
-                                    });
-                                    Webcam.attach('#my_camera');
-                                </script>
-                                 A button for taking snaps 
-                    
-                                <div id="pre_take_buttons">
-                                     This button is shown before the user takes a snapshot 
-                                    <input type=button value="Take Snapshot" onClick="preview_snapshot()">
-                                </div>
-                                <div id="post_take_buttons" style="display:none">
-                                     These buttons are shown after a snapshot is taken 
-                                    <input type=button value="&lt; Take Another" onClick="cancel_preview()">
-                                    <input type=button value="Save Photo &gt;" onClick="save_photo()" style="font-weight:bold;">
-                                </div>
-        
-                </div>-->
 
         <div id="results" style="display:none">
             <!-- Your captured image will appear here... -->
@@ -130,7 +90,12 @@
             shutter.autoplay = false;
             shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
 
-            function preview_snapshot() {
+            function foto() {
+                document.getElementById('fotosemimagem').style.display = 'none';
+                document.getElementById('fotografia').style.display = '';
+            }
+
+            function visualizaFoto() {
                 // play sound effect
                 try {
                     shutter.currentTime = 0;
@@ -145,32 +110,29 @@
                 //document.getElementById("foto").value=data_uri;
 
                 // swap button sets
-                document.getElementById('pre_take_buttons').style.display = 'none';
-                document.getElementById('post_take_buttons').style.display = '';
+                document.getElementById('botaoPreFoto').style.display = 'none';
+                document.getElementById('botaoTiraFoto').style.display = '';
             }
 
-            function cancel_preview() {
+            function cancelaVisualizar() {
                 // cancel preview freeze and return to live camera view
                 Webcam.unfreeze();
 
                 // swap buttons back to first set
-                document.getElementById('pre_take_buttons').style.display = '';
-                document.getElementById('post_take_buttons').style.display = 'none';
+                document.getElementById('botaoPreFoto').style.display = '';
+                document.getElementById('botaoTiraFoto').style.display = 'none';
             }
-            function save_photo() {
+            function salvaFoto() {
                 // actually snap photo (from preview freeze) and display it
                 Webcam.snap(function (data_uri) {
                     // display results in page
-                    document.getElementById('results').innerHTML = '<h2>Here is your large, cropped image:</h2>' +
-                            '<img src="' + data_uri + '"/><br/></br>' +
-                            '<a href="' + data_uri + '" target="_blank">Open image in new window...</a>';
+//                    document.getElementById('results').innerHTML = '<h2>Here is your large, cropped image:</h2>' +
+//                            '<img src="' + data_uri + '"/><br/></br>' +
+//                            '<a href="' + data_uri + '" target="_blank">Open image in new window...</a>';
                     // shut down camera, stop capturing
                     document.getElementById("foto").value = data_uri;
 
                     Webcam.reset();
-                    // show results, hide photo booth
-                    document.getElementById('results').style.display = '';
-                    document.getElementById('my_photo_booth').style.display = 'none';
                 });
             }
         </script>
