@@ -74,7 +74,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
+                        <img width="250" height="200" src="imagens/semimagem.png" alt="..." class="img-thumbnail" >
                         <!--CONTAINER PARA TIRAR A FOTO-->
                         <input type="hidden" name="foto" id="foto" value=""/><br><br>
                         <div id="cameraFotografica">
