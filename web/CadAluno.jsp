@@ -74,7 +74,100 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+
+                        <!--CONTAINER PARA TIRAR A FOTO-->
+                        <input type="hidden" name="foto" id="foto" value=""/><br><br>
+                        <div id="cameraFotografica">
+                            <div id="minha_camera"></div>
+                            <!-- CONFIGURANDO ATRIBUTOS DA CAMERA -->
+                            <script language="JavaScript">
+                                Webcam.set({
+                                    // TAMANHO DA VISUALIZAÇÃO AO VIVO
+                                    width: 320,
+                                    height: 240,
+                                    // TAMANHO DA CAPTURA DO DISPOSITIVO
+                                    dest_width: 640,
+                                    dest_height: 480,
+                                    // TAMANHO FINAL RECORTADO
+                                    crop_width: 480,
+                                    crop_height: 480,
+                                    // FORMATO E QUALIDADE
+                                    image_format: 'jpeg',
+                                    jpeg_quality: 90,
+                                    // VIRAR NA HORIZONTAL (MODO ESPELHO)
+                                    flip_horiz: true
+                                });
+                                Webcam.attach('#minha_camera');
+                            </script>
+                            <!-- A button for taking snaps -->
+
+                            <div id="botao_prefoto">
+                                <!-- ESTE BOTÃO É MOSTRADO ANTES DO USUÁRIO TIRAR UMA INSTANTANEA -->
+                                <input type=button value="Tirar Foto" onClick="visualizarFoto()">
+                            </div>
+                            <div id="posBotoes" style="display:none">
+                                <!-- ESTES BOTÕES SÃO MOSTRADOS DEPOIS DE VISUALIZAR A FOTO-->
+                                <input type=button value="Tirar outra" onClick="cancelaFoto()">
+                                <input type=button value="Salvar foto" onClick="salvarFoto()" style="font-weight:bold;">
+                            </div>
+
+                        </div>
+
+                        <div id="resultado" style="display:none">
+                            <!-- Your captured image will appear here... -->
+                        </div>
+                        <!-- CÓDIGO PARA FAZER O INSTANTANEO E EXIBI-LO LOCALMENTE -->
+                        <script language="JavaScript">
+//                            // preload shutter audio clip
+//                            var shutter = new Audio();
+//                            shutter.autoplay = false;
+//                            shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
+
+                            function visualizarFoto() {
+//                                // play sound effect
+//                                try {
+//                                    shutter.currentTime = 0;
+//                                } catch (e) {
+//                                    ;
+//                                } // fails in IE
+//                                shutter.play();
+
+                                // CONGELA A IMAGEM PARA QUE O USUÁRIO VISUALIZE
+                                Webcam.freeze();
+
+                                // CONJUNTO DE BOTÕES DE TROCA
+                                document.getElementById('botao_prefoto').style.display = 'none';
+                                document.getElementById('posBotoes').style.display = '';
+                            }
+
+                            function cancelaFoto() {
+                                // DESCONGELA A IMAGEM E VOLTA PARA A IMAGEM AO VIVO
+                                Webcam.unfreeze();
+
+                                // swap buttons back to first set
+                                document.getElementById('botao_prefoto').style.display = '';
+                                document.getElementById('posBotoes').style.display = 'none';
+                            }
+                            function salvarFoto() {
+                                // actually snap photo (from preview freeze) and display it
+                                Webcam.snap(function (data_uri) {
+//                                    // display results in page
+//                                    document.getElementById('results').innerHTML = '<h2>Here is your large, cropped image:</h2>' +
+//                                            '<img src="' + data_uri + '"/><br/></br>' +
+//                                            '<a href="' + data_uri + '" target="_blank">Open image in new window...</a>';
+//                                    // shut down camera, stop capturing
+                                    document.getElementById("foto").value = data_uri;
+
+                                    Webcam.reset();
+                                    // MOSTRAR RESULTADOS, OCULTAR CAMERAFOTOGRAFICA
+                                    //document.getElementById('results').style.display = '';
+                                    document.getElementById('cameraFotografica').style.display = 'none';
+                                });
+                            }
+                        </script>
+
+                        <!--FECHAR CONTAINER TIRAR A FOTO-->
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
