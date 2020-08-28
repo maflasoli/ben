@@ -96,7 +96,7 @@
                                 <input type=button value="Save Photo &gt;" onClick="salvaFoto()" style="font-weight:bold;">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-light" onClick="tiraFoto()">Tirar foto</button>
+                        <button type="button" id="btn_tirafoto" class="btn btn-outline-light" onClick="tiraFoto()">Tirar foto</button>
                     </div>
                 </div>
             </div>
@@ -114,6 +114,7 @@
 
             function tiraFoto() {
                 //console.log("FUNCIONANDO");
+                document.getElementById('btn_tirafoto').style.display='none';
                 document.getElementById('fotosemimagem').style.display = 'none';
                 document.getElementById('fotografia').style.display = '';
             }
