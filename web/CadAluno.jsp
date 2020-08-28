@@ -12,7 +12,29 @@
         <meta charset="UTF-8">
 
         <style type="text/css">
+            body{
+                margin: 0;
+                padding: 0;
 
+            }
+            #cadastro{
+                width: 700px;
+                height: 430px;
+                border: 2px solid #000;
+                border-radius: 80px 0px 80px 0px;
+                color: #fff;
+                background-color: rgba(0,0,5,0.3);
+                /*                background: transparent;*/
+                top: 50%;
+                left: 50%;
+                position: absolute;
+                transform: translate(-50%, -50%);
+                box-sizing: border-box;
+                padding: 68px 28px;
+            }
+            .form-control{
+                margin-bottom: 5px;
+            }
         </style>
 
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
@@ -37,7 +59,7 @@
                     <div class="col">
                         <img width="250" height="200" id="fotosemimagem" src="imagens/semimagem.png" alt="..." class="img-thumbnail">
 
-                        <div id="fotografia" style="display:none">
+                        <div id="fotografia"  style="display:none">
                             <div id="minhaCamera"></div>
                             <!-- INCLUIR A BIBLIOTECA RESPONSÁVEL PELA FOTOGRAFIA -->
                             <script type="text/javascript" src="js/webcam.min.js"></script>
@@ -74,7 +96,7 @@
                                 <input type=button value="Save Photo &gt;" onClick="salvaFoto()" style="font-weight:bold;">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-light" onClick="foto()">Tirar foto</button>
+                        <button type="button" class="btn btn-outline-light" onClick="tiraFoto()">Tirar foto</button>
                     </div>
                 </div>
             </div>
@@ -86,23 +108,24 @@
         <!-- Code to handle taking the snapshot and displaying it locally -->
         <script language="JavaScript">
             // preload shutter audio clip
-            var shutter = new Audio();
-            shutter.autoplay = false;
-            shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
+//            var shutter = new Audio();
+//            shutter.autoplay = false;
+//            shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
 
-            function foto() {
+            function tiraFoto() {
+                //console.log("FUNCIONANDO");
                 document.getElementById('fotosemimagem').style.display = 'none';
                 document.getElementById('fotografia').style.display = '';
             }
 
             function visualizaFoto() {
-                // play sound effect
-                try {
-                    shutter.currentTime = 0;
-                } catch (e) {
-                    ;
-                } // fails in IE
-                shutter.play();
+//                // play sound effect
+//                try {
+//                    shutter.currentTime = 0;
+//                } catch (e) {
+//                    ;
+//                } // fails in IE
+//                shutter.play();
 
                 // freeze camera so user can preview current frame
                 Webcam.freeze();
@@ -113,11 +136,9 @@
                 document.getElementById('botaoPreFoto').style.display = 'none';
                 document.getElementById('botaoTiraFoto').style.display = '';
             }
-
             function cancelaVisualizar() {
                 // cancel preview freeze and return to live camera view
                 Webcam.unfreeze();
-
                 // swap buttons back to first set
                 document.getElementById('botaoPreFoto').style.display = '';
                 document.getElementById('botaoTiraFoto').style.display = 'none';
@@ -125,20 +146,12 @@
             function salvaFoto() {
                 // actually snap photo (from preview freeze) and display it
                 Webcam.snap(function (data_uri) {
-                    // display results in page
-//                    document.getElementById('results').innerHTML = '<h2>Here is your large, cropped image:</h2>' +
-//                            '<img src="' + data_uri + '"/><br/></br>' +
-//                            '<a href="' + data_uri + '" target="_blank">Open image in new window...</a>';
-                    // shut down camera, stop capturing
                     document.getElementById("foto").value = data_uri;
-
                     Webcam.reset();
                 });
             }
         </script>
         <br>
         <input type="submit" value="Cadastrar" name="btnCadAluno" />
-
-
     </body>
 </html>
