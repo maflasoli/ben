@@ -88,12 +88,12 @@
 
                             <div id="botaoPreFoto">
                                 <!-- ESTE BOTÃO É EXIBIDO ANTES DE EFETUAR A FOTO -->
-                                <input type=button value="Take Snapshot" onClick="visualizaFoto()">
+                                <button type="button" id="btn_visualiza" class="btn btn-outline-light" onClick="visualizaFoto()">Capturar Imagem</button>
                             </div>
                             <div id="botaoTiraFoto" style="display:none">
                                 <!-- These buttons are shown after a snapshot is taken -->
-                                <input type=button value="&lt; Take Another" onClick="cancelaVisualizar()">
-                                <input type=button value="Save Photo &gt;" onClick="salvaFoto()" style="font-weight:bold;">
+                                <button type="button" id="btn_cancelafoto" class="btn btn-outline-light" onClick="cancelaVisualizar()">Cancelar</button>
+                                <button type="button" id="btn_salvafoto" class="btn btn-outline-light" onClick="salvaFoto()">Gravar</button>
                             </div>
                         </div>
                         <button type="button" id="btn_tirafoto" class="btn btn-outline-light" onClick="tiraFoto()">Tirar foto</button>
