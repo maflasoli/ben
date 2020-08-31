@@ -19,9 +19,9 @@
             }
             #cadastro{
                 width: 700px;
-                height: 430px;
+                height: 530px;
                 border: 2px solid #000;
-                border-radius: 80px 0px 80px 0px;
+                border-radius: 50px 0px 50px 0px;
                 color: #fff;
                 background-color: rgba(0,0,5,0.3);
                 /*                background: transparent;*/
@@ -44,7 +44,14 @@
 
     </head>
     <body>
-        <div>Cadastro de aluno</div>
+        <%
+            String usuario = (String) session.getAttribute("usuario");
+            if (usuario == null) {
+                response.sendRedirect("index.jsp");
+            } else {
+                out.print("Bem vindo " + usuario + "<\br>");
+            }
+        %>
 
         <form id="formulario" action="cadaluno" method="POST">
             <div class="container" id="cadastro">
@@ -89,6 +96,7 @@
                             <div id="botaoPreFoto">
                                 <!-- ESTE BOTÃO É EXIBIDO ANTES DE EFETUAR A FOTO -->
                                 <button type="button" id="btn_visualiza" class="btn btn-outline-light" onClick="visualizaFoto()">Capturar Imagem</button>
+                                <button type="button" id="btn_cancela" class="btn btn-outline-light" onClick="cancelaFoto()">Cancelar Foto</button>
                             </div>
                             <div id="botaoTiraFoto" style="display:none">
                                 <!-- These buttons are shown after a snapshot is taken -->
@@ -99,6 +107,9 @@
                         <button type="button" id="btn_tirafoto" class="btn btn-outline-light" onClick="tiraFoto()">Tirar foto</button>
                     </div>
                 </div>
+                <br>
+                <br>
+                <button type="button" id="btn_cadastrar" class="btn btn-success" onClick="">Cadastrar</button>
             </div>
         </form>
 
@@ -114,9 +125,14 @@
 
             function tiraFoto() {
                 //console.log("FUNCIONANDO");
-                document.getElementById('btn_tirafoto').style.display='none';
+                document.getElementById('btn_tirafoto').style.display = 'none';
                 document.getElementById('fotosemimagem').style.display = 'none';
                 document.getElementById('fotografia').style.display = '';
+            }
+            function cancelaFoto() {
+                document.getElementById('btn_tirafoto').style.display = '';
+                document.getElementById('fotosemimagem').style.display = '';
+                document.getElementById('fotografia').style.display = 'none';
             }
 
             function visualizaFoto() {
@@ -152,7 +168,5 @@
                 });
             }
         </script>
-        <br>
-        <input type="submit" value="Cadastrar" name="btnCadAluno" />
     </body>
 </html>
