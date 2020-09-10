@@ -57,9 +57,9 @@
             <div class="container" id="cadastro">
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="R.M.">
-                        <input type="text" class="form-control" placeholder="Nome">
-                        <input type="text" class="form-control" placeholder="Endereço">
+                        <input type="text" name="txtRmAluno" class="form-control" placeholder="R.M.">
+                        <input type="text" name="txtNomeAluno" class="form-control" placeholder="Nome">
+                        <input type="text" name="txtEndAluno" class="form-control" placeholder="Endereço">
                         <!--SÓ PARA GUARDAR O VALOR DA FOTO BASE64-->
                         <input type="hidden" name="foto" id="foto" value=""/><br><br>
                     </div>
@@ -109,7 +109,7 @@
                 </div>
                 <br>
                 <br>
-                <button type="button" id="btn_cadastrar" class="btn btn-success" onClick="">Cadastrar</button>
+                <button type="button" id="btn_cadastrar" class="btn btn-success"S>Cadastrar</button>
             </div>
         </form>
 

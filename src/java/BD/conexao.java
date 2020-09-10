@@ -55,9 +55,13 @@ public class conexao {
         return autentico;
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        conexao con = new conexao();
-//        System.out.println("Ola GUJ");
-//        System.out.println(con.validaUsuario("teste", "teste"));
-//    }
+    public void cadAluno(String rmaluno, String nomealuno, String endaluno, String fotoaluno) {
+        try {
+            PreparedStatement pst = conecta.prepareStatement("INSERT INTO testealuno(rmaluno,nomealuno,endaluno,fotoaluno) VALUES (" + rmaluno + ",'" + nomealuno + "','" + endaluno + "','" + fotoaluno + "')");
+            pst.executeUpdate();
+            pst.close();
+        } catch (SQLException sqle) {
+            System.out.println("Deu pau... conexao.cadAluno");
+        }
+    }
 }
