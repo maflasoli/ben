@@ -59,21 +59,21 @@ public class cadaluno extends HttpServlet {
                 osf.close();// SE NÃO COLOCAR O CLOSE, ELE DEIXA O ARQUIVO ABERTO...
             }
             con.cadAluno(rm, nome, endereco, rm);
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet cadAluno</title>");            
-            out.println("</head>");
-            out.println("<body>");
             
-            out.println(caminhoImagem);
-                    
-            
-          
-            out.println("</body>");
-            out.println("</html>");
-            
+            response.sendRedirect("CadAluno.jsp");
+//
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet cadAluno</title>");            
+//            out.println("</head>");
+//            out.println("<body>");
+//            
+//            out.println(caminhoImagem);
+//
+//            out.println("</body>");
+//            out.println("</html>");
+//            
             
         }
     }

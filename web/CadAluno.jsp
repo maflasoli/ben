@@ -109,7 +109,7 @@
                 </div>
                 <br>
                 <br>
-                <button type="button" id="btn_cadastrar" class="btn btn-success"S>Cadastrar</button>
+                <button type="submit" id="btn_cadastrar" class="btn btn-success">Cadastrar</button>
             </div>
         </form>
 
@@ -164,6 +164,8 @@
                 // actually snap photo (from preview freeze) and display it
                 Webcam.snap(function (data_uri) {
                     document.getElementById("foto").value = data_uri;
+                    document.getElementById('fotosemimagem').style.display = '';
+
                     Webcam.reset();
                 });
             }

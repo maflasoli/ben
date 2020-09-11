@@ -64,4 +64,18 @@ public class conexao {
             System.out.println("Deu pau... conexao.cadAluno");
         }
     }
+
+    public ResultSet listaAluno() {
+        //conexao con = new conexao();
+        ResultSet lista = null;
+        try {
+            PreparedStatement ps = conecta.prepareStatement("select * from testealuno");
+            lista = ps.executeQuery();
+            //lista.close();
+            //conecta.close();
+        } catch (SQLException sqle) {
+            System.out.println("Deu pau... listaAluno");
+        }
+        return lista;
+    }
 }

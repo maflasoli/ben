@@ -51,7 +51,7 @@
                                 <a href="#">Matrícula</a>
                             </li>
                             <li>
-                                <a href="#">Lista</a>
+                                <a href="listaAluno">Lista</a>
                             </li>
                         </ul>
                     </li>
