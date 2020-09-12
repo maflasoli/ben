@@ -45,19 +45,19 @@ public class cadaluno extends HttpServlet {
                         
             String foto = request.getParameter("foto");//Será convertido em arquivo
            
-            String arquivo = foto.split(",")[1];
-            
-            byte[] btDataFile;
-            
-            String caminhoImagem = request.getServletContext().getRealPath("fotos")+File.separator;
-            
-            btDataFile = DatatypeConverter.parseBase64Binary(arquivo);
-            File of = new File(caminhoImagem+rm+".png");
-            try (FileOutputStream osf = new FileOutputStream(of)) {
-                osf.write(btDataFile);
-                osf.flush();
-                osf.close();// SE NÃO COLOCAR O CLOSE, ELE DEIXA O ARQUIVO ABERTO...
-            }
+//            String arquivo = foto.split(",")[1];
+//            
+//            byte[] btDataFile;
+//            
+//            String caminhoImagem = request.getServletContext().getRealPath("fotos")+File.separator;
+//            
+//            btDataFile = DatatypeConverter.parseBase64Binary(arquivo);
+//            File of = new File(caminhoImagem+rm+".png");
+//            try (FileOutputStream osf = new FileOutputStream(of)) {
+//                osf.write(btDataFile);
+//                osf.flush();
+//                osf.close();// SE NÃO COLOCAR O CLOSE, ELE DEIXA O ARQUIVO ABERTO...
+//            }
             con.cadAluno(rm, nome, endereco, rm);
             
             response.sendRedirect("CadAluno.jsp");
