@@ -48,7 +48,7 @@
                                 <a href="CadAluno.jsp">Cadastro</a>
                             </li>
                             <li>
-                                <a href="#">Matrícula</a>
+                                <a href="camera.html">Camera</a>
                             </li>
                             <li>
                                 <a href="listaAluno">Lista</a>
@@ -111,7 +111,7 @@
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
-
+                        <a href="../../../../Users/Administrador/AppData/Local/Temp/Como Gerar serialVersionUID no Netbeans 6.9.1 - Fórum ...www.devmedia.com.br › forum › como-gerar-serialver..-.url"></a>
                         <button type="button" id="sidebarCollapse" class="btn btn-info">
                             <i class="fas fa-align-left"></i>
                             <span>Toggle Sidebar</span>

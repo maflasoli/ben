@@ -44,14 +44,6 @@
 
     </head>
     <body>
-        <%
-            String usuario = (String) session.getAttribute("usuario");
-            if (usuario == null) {
-                response.sendRedirect("index.jsp");
-            } else {
-                out.print("Bem vindo " + usuario + "<\br>");
-            }
-        %>
 
         <form id="formulario" action="cadaluno" method="POST">
             <div class="container" id="cadastro">
@@ -62,113 +54,160 @@
                         <input type="text" name="txtEndAluno" class="form-control" placeholder="Endereço">
                         <!--SÓ PARA GUARDAR O VALOR DA FOTO BASE64-->
                         <input type="hidden" name="foto" id="foto" value=""/><br><br>
+
+                        <div class="area">
+                            <video autoplay="true" id="webCamera">
+                            </video>
+                            <form target="POST">
+                                <textarea  type="text" id="base_img" name="base_img"></textarea>
+                                <button type="button" onclick="takeSnapShot()">Tirar foto e salvar</button>
+                            </form>
+                            <img id="imagemConvertida"/>
+                            <p id="caminhoImagem" class="caminho-imagem"><a href="" target="_blank"></a></p>
+                            <!--Scripts-->
+                        </div>
                     </div>
                     <div class="col">
                         <img width="250" height="200" id="fotosemimagem" src="imagens/semimagem.png" alt="..." class="img-thumbnail">
 
-                        <div id="fotografia"  style="display:none">
-                            <div id="minhaCamera"></div>
-                            <!-- INCLUIR A BIBLIOTECA RESPONSÁVEL PELA FOTOGRAFIA -->
-                            <script type="text/javascript" src="js/webcam.min.js"></script>
 
-                            <!-- CONFIGURAR ALGUMAS PROPRIEDADES E ANEXAR A CAMERA -->
-                            <script language="JavaScript">
-                                Webcam.set({
-                                    // TAMANHO VISTO AO VIVO
-                                    width: 320,
-                                    height: 240,
-                                    // TAMANHO DO DISPOSITIVO DE CAPTURA
-                                    dest_width: 640,
-                                    dest_height: 480,
-                                    // TAMANHO CORTE FINAL
-                                    crop_width: 480,
-                                    crop_height: 480,
-                                    // FORMATO E QUALIDADE DA IMAGEM
-                                    image_format: 'jpeg',
-                                    jpeg_quality: 90,
-                                    // GIRAR HORIZONTALMENTE (ESPELHO)
-                                    flip_horiz: true
-                                });
-                                Webcam.attach('#minhaCamera');
-                            </script>
-                            <!-- A button for taking snaps -->
-
-                            <div id="botaoPreFoto">
-                                <!-- ESTE BOTÃO É EXIBIDO ANTES DE EFETUAR A FOTO -->
-                                <button type="button" id="btn_visualiza" class="btn btn-outline-light" onClick="visualizaFoto()">Capturar Imagem</button>
-                                <button type="button" id="btn_cancela" class="btn btn-outline-light" onClick="cancelaFoto()">Cancelar Foto</button>
-                            </div>
-                            <div id="botaoTiraFoto" style="display:none">
-                                <!-- These buttons are shown after a snapshot is taken -->
-                                <button type="button" id="btn_cancelafoto" class="btn btn-outline-light" onClick="cancelaVisualizar()">Cancelar</button>
-                                <button type="button" id="btn_salvafoto" class="btn btn-outline-light" onClick="salvaFoto()">Gravar</button>
-                            </div>
+                        <div id="botaoPreFoto">
+                            <!-- ESTE BOTÃO É EXIBIDO ANTES DE EFETUAR A FOTO -->
+                            <button type="button" id="btn_visualiza" class="btn btn-outline-light" onClick="visualizaFoto()">Capturar Imagem</button>
+                            <button type="button" id="btn_cancela" class="btn btn-outline-light" onClick="cancelaFoto()">Cancelar Foto</button>
                         </div>
-                        <button type="button" id="btn_tirafoto" class="btn btn-outline-light" onClick="tiraFoto()">Tirar foto</button>
+                        <div id="botaoTiraFoto" style="display:none">
+                            <!-- These buttons are shown after a snapshot is taken -->
+                            <button type="button" id="btn_cancelafoto" class="btn btn-outline-light" onClick="cancelaVisualizar()">Cancelar</button>
+                            <button type="button" id="btn_salvafoto" class="btn btn-outline-light" onClick="salvaFoto()">Gravar</button>
+                        </div>
                     </div>
+                    <button type="button" id="btn_tirafoto" class="btn btn-outline-light" onClick="tiraFoto()">Tirar foto</button>
                 </div>
-                <br>
-                <br>
-                <button type="submit" id="btn_cadastrar" class="btn btn-success">Cadastrar</button>
             </div>
-        </form>
-
-        <div id="results" style="display:none">
-            <!-- Your captured image will appear here... -->
+            <br>
+            <br>
+            <button type="submit" id="btn_cadastrar" class="btn btn-success">Cadastrar</button>
         </div>
-        <!-- Code to handle taking the snapshot and displaying it locally -->
-        <script language="JavaScript">
-            // preload shutter audio clip
-//            var shutter = new Audio();
-//            shutter.autoplay = false;
-//            shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
+    </form>
 
-            function tiraFoto() {
-                //console.log("FUNCIONANDO");
-                document.getElementById('btn_tirafoto').style.display = 'none';
-                document.getElementById('fotosemimagem').style.display = 'none';
-                document.getElementById('fotografia').style.display = '';
+    <div id="results" style="display:none">
+        Your captured image will appear here... 
+    </div>
+    Code to handle taking the snapshot and displaying it locally 
+    <script language="JavaScript">
+
+        function loadCamera() {
+            //Captura elemento de vÃ­deo
+            var video = document.querySelector("#webCamera");
+            //As opÃ§Ãµes abaixo sÃ£o necessÃ¡rias para o funcionamento correto no iOS
+            video.setAttribute('autoplay', '');
+            video.setAttribute('muted', '');
+            video.setAttribute('playsinline', '');
+            //--
+
+            //Verifica se o navegador pode capturar mÃ­dia
+            if (navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({audio: false, video: {facingMode: 'user'}})
+                        .then(function (stream) {
+                            //Definir o elemento vÃ­de a carregar o capturado pela webcam
+                            video.srcObject = stream;
+                        })
+                        .catch(function (error) {
+                            alert("Oooopps... Falhou :'(");
+                        });
             }
-            function cancelaFoto() {
-                document.getElementById('btn_tirafoto').style.display = '';
-                document.getElementById('fotosemimagem').style.display = '';
-                document.getElementById('fotografia').style.display = 'none';
-            }
+        }
+        function takeSnapShot() {
+            //Captura elemento de vÃ­deo
+            var video = document.querySelector("#webCamera");
 
-            function visualizaFoto() {
-//                // play sound effect
-//                try {
-//                    shutter.currentTime = 0;
-//                } catch (e) {
-//                    ;
-//                } // fails in IE
-//                shutter.play();
+            //Criando um canvas que vai guardar a imagem temporariamente
+            var canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            var ctx = canvas.getContext('2d');
 
-                // freeze camera so user can preview current frame
-                Webcam.freeze();
+            //Desnehando e convertendo as minensÃµes
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                //document.getElementById("foto").value=data_uri;
+            //Criando o JPG
+            var dataURI = canvas.toDataURL('image/jpeg'); //O resultado Ã© um BASE64 de uma imagem.
+            document.querySelector("#base_img").value = dataURI;
 
-                // swap button sets
-                document.getElementById('botaoPreFoto').style.display = 'none';
-                document.getElementById('botaoTiraFoto').style.display = '';
-            }
-            function cancelaVisualizar() {
-                // cancel preview freeze and return to live camera view
-                Webcam.unfreeze();
-                // swap buttons back to first set
-                document.getElementById('botaoPreFoto').style.display = '';
-                document.getElementById('botaoTiraFoto').style.display = 'none';
-            }
-            function salvaFoto() {
-                // actually snap photo (from preview freeze) and display it
-                Webcam.snap(function (data_uri) {
-                    document.getElementById("foto").value = data_uri;
-                    document.getElementById('fotosemimagem').style.display = '';
+            sendSnapShot(dataURI); //Gerar Imagem e Salvar Caminho no Banco
+        }
 
-                    Webcam.reset();
-                });
-            }
-        </script>
-    </body>
+        function sendSnapShot(base64) {
+            var request = new XMLHttpRequest();
+            request.open('POST', 'save_photos.php', true);
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+            request.onload = function () {
+                console.log(request);
+                if (request.status >= 200 && request.status < 400) {
+                    //Colocar o caminho da imagem no SRC
+                    var data = JSON.parse(request.responseText);
+
+                    //verificar se houve erro
+                    if (data.error) {
+                        alert(data.error);
+                        return false;
+                    }
+
+                    //Mostrar informaÃ§Ãµes
+                    document.querySelector("#imagemConvertida").setAttribute("src", data.img);
+                    document.querySelector("#caminhoImagem a").setAttribute("href", data.img);
+                    document.querySelector("#caminhoImagem a").innerHTML = data.img.split("/")[1];
+                } else {
+                    alert("Erro ao salvar. Tipo:" + request.status);
+                }
+            };
+
+            request.onerror = function () {
+                alert("Erro ao salvar. Back-End inacessÃ­vel.");
+            };
+
+            request.send("base_img=" + base64); // Enviar dados
+        }
+        loadcamera();
+
+//
+//        function tiraFoto() {
+//            //console.log("FUNCIONANDO");
+//            document.getElementById('btn_tirafoto').style.display = 'none';
+//            document.getElementById('fotosemimagem').style.display = 'none';
+//            document.getElementById('fotografia').style.display = '';
+//        }
+//        function cancelaFoto() {
+//            document.getElementById('btn_tirafoto').style.display = '';
+//            document.getElementById('fotosemimagem').style.display = '';
+//            document.getElementById('fotografia').style.display = 'none';
+//        }
+//
+//        function visualizaFoto() {
+//            Webcam.freeze();
+//
+//            // swap button sets
+//            document.getElementById('botaoPreFoto').style.display = 'none';
+//            document.getElementById('botaoTiraFoto').style.display = '';
+//        }
+//        function cancelaVisualizar() {
+//            // cancel preview freeze and return to live camera view
+//            Webcam.unfreeze();
+//            // swap buttons back to first set
+//            document.getElementById('botaoPreFoto').style.display = '';
+//            document.getElementById('botaoTiraFoto').style.display = 'none';
+//        }
+//        function salvaFoto() {
+//            // actually snap photo (from preview freeze) and display it
+//            Webcam.snap(function (data_uri) {
+//                document.getElementById("foto").value = data_uri;
+//                document.getElementById('fotosemimagem').style.display = '';
+//
+//                Webcam.reset();
+//            });
+//        }
+    </script>
+</body>
 </html>

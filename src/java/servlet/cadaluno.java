@@ -19,8 +19,6 @@ import java.sql.ResultSet;
 import javax.servlet.annotation.WebServlet;
 import javax.xml.bind.DatatypeConverter;
 
-
-
 /**
  *
  * @author Administrador
@@ -29,52 +27,52 @@ import javax.xml.bind.DatatypeConverter;
 public class cadaluno extends HttpServlet {
 
     conexao con = new conexao();
-    ResultSet lista=null;
-    
+    ResultSet lista = null;
+
     //Connection con;
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+
             String rm = request.getParameter("txtRmAluno");
             String nome = request.getParameter("txtNomeAluno");
             String endereco = request.getParameter("txtEndAluno");
-                        
+
             String foto = request.getParameter("foto");//Será convertido em arquivo
-           
-//            String arquivo = foto.split(",")[1];
-//            
-//            byte[] btDataFile;
-//            
-//            String caminhoImagem = request.getServletContext().getRealPath("fotos")+File.separator;
-//            
+
+            String arquivo = foto.split(",")[1];
+
+            byte[] btDataFile;
+
+            String caminhoImagem = request.getServletContext().getRealPath("fotos") + File.separator;
+            //String caminhoImagem = "../fotos";
+//
 //            btDataFile = DatatypeConverter.parseBase64Binary(arquivo);
-//            File of = new File(caminhoImagem+rm+".png");
+//            File of = new File(caminhoImagem + rm + ".png");
 //            try (FileOutputStream osf = new FileOutputStream(of)) {
 //                osf.write(btDataFile);
 //                osf.flush();
 //                osf.close();// SE NÃO COLOCAR O CLOSE, ELE DEIXA O ARQUIVO ABERTO...
 //            }
             con.cadAluno(rm, nome, endereco, rm);
-            
+
             response.sendRedirect("CadAluno.jsp");
-//
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet cadAluno</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            
-//            out.println(caminhoImagem);
-//
-//            out.println("</body>");
-//            out.println("</html>");
-//            
+
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet cadAluno</title>");
             
+            out.println("</head>");
+            out.println("<body>");
+
+            out.println(caminhoImagem);
+
+            out.println("</body>");
+            out.println("</html>");
+
         }
     }
 

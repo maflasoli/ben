@@ -28,7 +28,7 @@ public class conexao {
             System.out.println("Classe não encontrada..");
         }
         try {
-            //conecta = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/quim1", "root", "19twostars");
+//            conecta = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/quim1", "root", "19twostars");
             
             //ALTERAÇÃO PARA O USO NO JELASTIC (NA NUVEM)
             conecta = DriverManager.getConnection("jdbc:mysql://node54656-quiim.jelastic.saveincloud.net/quim1", "root", "QDCglv28188");
